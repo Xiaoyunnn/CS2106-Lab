@@ -144,11 +144,12 @@ void addNode(TTreeNode **root, TTreeNode *node) {
 
     // Add a new node to the tree, where root is
     // the POINTER to the tree's root.
-    TTreeNode *trav = *root;
-    if (trav == NULL) {
-        trav = node;
+    if (*root == NULL) {
+        *root = node;
+        return;
     }
 
+    TTreeNode *trav = *root;
     while (1) {
         int cmp = strcmp(trav->name, node->name);
 
@@ -185,6 +186,6 @@ void print_inorder(TTreeNode *node) {
     } 
 
     print_inorder(node->left);
-    printf("Name: %s, Phone Num: %s", node->name, node->phoneNum);
+    printf("Name: %s, Phone Num: %s\n", node->name, node->phoneNum);
     print_inorder(node->right);
 }
