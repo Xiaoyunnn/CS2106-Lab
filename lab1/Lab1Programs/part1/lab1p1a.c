@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-int (*fptr)(int);
+int (*fptr)(int); // pointer to a function that returns an “int”, and takes an int as an argument
 
 int func(int x) {
     return 2 * x;
@@ -9,9 +9,10 @@ int func(int x) {
 
 int y = 10;
 
-int *(*pfptr)();
+int *(*pfptr)(); // pointer to a function that returns an int pointer
 
 int *func2() {
+    // function that returns an int pointer
     return &y;
 }
 
