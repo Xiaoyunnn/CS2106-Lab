@@ -11,7 +11,6 @@ TPerson *makeNewNode(char *name, int age) {
     TPerson *p = (TPerson *) malloc(sizeof(TPerson));
     p->name = (char *) malloc(strlen(name) + 1);
     strcpy(p->name, name);
-//    free(p->name);
     p->age = age;
 
     return p;
@@ -20,7 +19,6 @@ TPerson *makeNewNode(char *name, int age) {
 void freeNode(TPerson *node) {
     free(node->name);
     free(node);
-//    free(node->name);
 }
 
 
