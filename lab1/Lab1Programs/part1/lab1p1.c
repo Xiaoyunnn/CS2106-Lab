@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include "queue.h"
 
-void enq(double data);
-double deq();
 
 int main() {
 	double v;
