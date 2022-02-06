@@ -1,6 +1,25 @@
 #!/bin/bash
 
 # Check if we have enough arguments
+if [[ $# -ne 1 ]]; then
+    echo "Usage: $0 <filename>"
+else
+    cd ref
+    gcc *.c -o $1
+    count=$(find . -name "*.out" | wc -l)
+    if [[ $count -ne 0 ]]; then
+        # echo "rm *.out"
+        rm *.out
+    # else
+    #     echo "no out file"
+    fi
+
+    for i in *.in; do
+        # echo "$1 < $i > $i.out"
+        ./$1 < $i > $i.out
+    done
+
+fi
 
 # Delete temporary files
 
