@@ -120,7 +120,7 @@ void delTree(TTreeNode *root) {
 
     delTree(root->left);
     delTree(root->right);
-    free(root);
+    freenode(root);
 }
 
 TTreeNode *makeNewNode(char *name, char *phoneNum) {
