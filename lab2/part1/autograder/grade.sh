@@ -9,10 +9,7 @@ else
     # Delete temporary files
     count=$(find . -name "*.out" | wc -l)
     if [[ $count -ne 0 ]]; then
-        # echo "rm *.out"
         rm *.out
-    # else
-    #     echo "no out file"
     fi
 
     # Compile reference program
@@ -20,7 +17,6 @@ else
 
     # Generate reference output files
     for i in *.in; do
-        # echo "ref/$1 < $i > $i.out"
         ./$1 < $i > $i.out
     done
 
@@ -36,7 +32,6 @@ else
     # Mark submissions
     for dir in ../subs/*; do
         let num++
-        # echo "gcc $dir/*.c -o $dir/res"
         FILE=$(basename $dir)
         # echo "$FILE"
         gcc $dir/*.c -o $FILE-res
@@ -48,7 +43,6 @@ else
         let score=0
 
         for i in *.in; do
-            # echo "../subs/$dir/res < $i > ../subs/$dir/$i.out"
             if [[ -f ./$FILE-res ]]; then
                 ./$FILE-res < $i > $FILE-$i.out
 
