@@ -5,7 +5,8 @@ if [[ $# -ne 1 ]]; then
     echo "Usage: $0 <filename>"
 else
     cd ref
-    gcc *.c -o $1
+
+    # Delete temporary files
     count=$(find . -name "*.out" | wc -l)
     if [[ $count -ne 0 ]]; then
         # echo "rm *.out"
@@ -14,20 +15,60 @@ else
     #     echo "no out file"
     fi
 
+    # Compile reference program
+    gcc *.c -o $1
+
+    # Generate reference output files
     for i in *.in; do
-        # echo "$1 < $i > $i.out"
+        # echo "ref/$1 < $i > $i.out"
         ./$1 < $i > $i.out
     done
 
+    # max score
+    max=$(find . -name "*.out" -type f | wc -l | sed 's/ //g')
+
+    # touch results.out
+    echo -e "Test date and time: $(date +%A), $(date +"%d %B %Y"), $(date +%T)\n" > results.out
+
+    #count number of dir processed
+    let num=0
+
+    # Mark submissions
+    for dir in ../subs/*; do
+        let num++
+        # echo "gcc $dir/*.c -o $dir/res"
+        FILE=$(basename $dir)
+        # echo "$FILE"
+        gcc $dir/*.c -o $FILE-res
+        if [[ $? -ne 0 ]]; then
+            # echo "compilation error"
+            echo "Directory $FILE has a compilation error." >> results.out
+        fi
+        
+        let score=0
+
+        for i in *.in; do
+            # echo "../subs/$dir/res < $i > ../subs/$dir/$i.out"
+            if [[ -f ./$FILE-res ]]; then
+                ./$FILE-res < $i > $FILE-$i.out
+
+                if cmp -s -- "$i.out" "$FILE-$i.out"; then
+                # if diff "$i.out" "$FILE-$i.out"; then
+                    # echo "$i.out and $dir-$i.out have identical contents"
+                    let score++
+                # else
+                    #: # the differences between the files have been listed
+                    # echo "files are diff"
+                fi
+            fi
+            
+        done
+        echo "Directory $FILE score $score / $max" >> results.out
+    done
+
+    echo -e "\nProcessed $num files." >> results.out
+
 fi
-
-# Delete temporary files
-
-# Compile the reference program
-
-# Generate reference output files
-
-# Now mark submissions
 
 #
 # Note: See Lab02Qn.pdf for format of output file. Marks will be deducted for missing elements.
