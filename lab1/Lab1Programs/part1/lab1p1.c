@@ -6,7 +6,7 @@ int main() {
 	double v;
 
 	for(int i = 0; i<= MAX_Q_SIZE; i++) {
-		v = ((double) i / 10.0);
+		v = ((double) i / 2.0);
 		printf("Adding %3.2f\n", v);
 		enq(v);
 	}
