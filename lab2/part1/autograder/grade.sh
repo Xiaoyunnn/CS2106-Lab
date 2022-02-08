@@ -24,7 +24,7 @@ else
     max=$(find . -name "*.out" -type f | wc -l | sed 's/ //g')
 
     # touch results.out
-    echo -e "Test date and time: $(date +%A), $(date +"%d %B %Y"), $(date +%T)\n" > results.out
+    echo -e "Test date and time: $(date +%A), $(date +"%d %B %Y"), $(date +%T)\n" > ../results.out
 
     #count number of dir processed
     let num=0
@@ -37,7 +37,7 @@ else
         gcc $dir/*.c -o $FILE-res
         if [[ $? -ne 0 ]]; then
             # echo "compilation error"
-            echo "Directory $FILE has a compilation error." >> results.out
+            echo "Directory $FILE has a compilation error." >> ../results.out
         fi
         
         let score=0
@@ -57,10 +57,10 @@ else
             fi
             
         done
-        echo "Directory $FILE score $score / $max" >> results.out
+        echo "Directory $FILE score $score / $max" >> ../results.out
     done
 
-    echo -e "\nProcessed $num files." >> results.out
+    echo -e "\nProcessed $num files." >> ../results.out
 
 fi
 
