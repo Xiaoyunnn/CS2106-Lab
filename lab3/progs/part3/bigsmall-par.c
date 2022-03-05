@@ -14,13 +14,16 @@
 int main() {
 
     int vect[VECT_SIZE];
+    // int largest[NUM_PROCESSES], smallest[NUM_PROCESSES];
     int pid, shmid_largest, shmid_smallest;
     int *largest;
     int *smallest;
 
-    shmid_largest = shmget(IPC_PRIVATE, NUM_PROCESSES * sizeof(sem_t), IPC_CREAT | 0600);
-    sem = (sem_t *) shmat(shmid, NULL, 0);
-    int largest[NUM_PROCESSES], smallest[NUM_PROCESSES];
+    shmid_largest = shmget(IPC_PRIVATE, NUM_PROCESSES * sizeof(int), IPC_CREAT | 0600);
+    largest = (int *) shmat(shmid_largest, NULL, 0);
+
+    shmid_smallest = shmget(IPC_PRIVATE, NUM_PROCESSES * sizeof(int), IPC_CREAT | 0600);
+    smallest = (int *) shmat(shmid_smallest, NULL, 0);
 
     float per_process_raw = (float) VECT_SIZE / NUM_PROCESSES;
     int per_process = (int) per_process_raw;
@@ -67,6 +70,7 @@ int main() {
         }
         largest[i] = big;
         smallest[i] = small;
+        printf("start: %d, biggest: %d, smallest: %d\n", start, big, small);
         reach_barrier();
 
     }
@@ -76,6 +80,7 @@ int main() {
         start = clock();
         for(j=0; j<NUM_PROCESSES; j++)
         {
+            printf("largest[j]: %d, smallest[j]: %d\n", largest[j], smallest[j]);
             if(largest[j] > big)
                 big = largest[j];
 
