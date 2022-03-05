@@ -27,7 +27,7 @@ void reach_barrier() {
     count[0]++;
     sem_post(&sem[0]);
 
-    if (count[0] = nproc) {
+    if (count[0] == nproc) {
         // release one process
         sem_post(&sem[1]);
     } else {
@@ -38,7 +38,9 @@ void reach_barrier() {
         // now that we are freed.
         sem_post(&sem[1]);
     }
+
 }
+    
 
 void destroy_barrier(int my_pid) {
     if(my_pid != 0) {
