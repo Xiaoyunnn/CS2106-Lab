@@ -40,7 +40,9 @@ int main() {
         }
 
         printf("\n\n");
-        sem_post(sem[i + 1]);
+        if (i < NUM_PROCESSES - 1) {
+            sem_post(sem[i + 1]);
+        }
     }
     else {
         for(i=0; i<NUM_PROCESSES; i++) 
