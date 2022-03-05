@@ -3,6 +3,8 @@
 #include <limits.h>
 #include <unistd.h>
 #include <time.h>
+#include <semaphore.h>
+#include <sys/shm.h>
 #include <sys/wait.h>
 #include "config.h"
 #include "barrier.h"
@@ -12,7 +14,12 @@
 int main() {
 
     int vect[VECT_SIZE];
-    int pid;
+    int pid, shmid_largest, shmid_smallest;
+    int *largest;
+    int *smallest;
+
+    shmid_largest = shmget(IPC_PRIVATE, NUM_PROCESSES * sizeof(sem_t), IPC_CREAT | 0600);
+    sem = (sem_t *) shmat(shmid, NULL, 0);
     int largest[NUM_PROCESSES], smallest[NUM_PROCESSES];
 
     float per_process_raw = (float) VECT_SIZE / NUM_PROCESSES;
