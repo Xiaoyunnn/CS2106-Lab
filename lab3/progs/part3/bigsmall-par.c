@@ -32,6 +32,8 @@ int main() {
         vect[i] = rand();
     }
 
+    init_barrier(NUM_PROCESSES+1);
+
     for(i=0; i<NUM_PROCESSES; i++) {
         pid = fork();
 
@@ -57,10 +59,12 @@ int main() {
         }
         largest[i] = big;
         smallest[i] = small;
+        reach_barrier();
 
     }
     else 
     {
+        reach_barrier();
         start = clock();
         for(j=0; j<NUM_PROCESSES; j++)
         {
@@ -81,6 +85,8 @@ int main() {
         // Clean up process table
         for(j=0; j<NUM_PROCESSES; j++)
             wait(NULL);
+
+        destroy_barrier(pid);
     }
 }
 
