@@ -13,7 +13,7 @@ int main() {
 
     sem_t *sem;
 
-    shmid = shmget(IPC_PRIVATE, (NUM_PROCESSES+1) * sizeof(sem_t), IPC_CREAT | 0600);
+    shmid = shmget(IPC_PRIVATE, NUM_PROCESSES * sizeof(sem_t), IPC_CREAT | 0600);
     sem = (sem_t *) shmat(shmid, NULL, 0);
 
     for (k = 0; k < NUM_PROCESSES; k++) {
