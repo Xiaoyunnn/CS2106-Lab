@@ -60,6 +60,7 @@ int main() {
         }
         largest[i] = big;
         smallest[i] = small;
+        printf("start: %d, biggest: %d, smallest: %d\n", start, big, small);
         reach_barrier();
 
     }
@@ -69,6 +70,7 @@ int main() {
         start = clock();
         for(j=0; j<NUM_PROCESSES; j++)
         {
+            printf("largest[j]: %d, smallest[j]: %d\n", largest[j], smallest[j]);
             if(largest[j] > big)
                 big = largest[j];
 
