@@ -38,6 +38,7 @@ void reach_barrier() {
         // now that we are freed.
         sem_post(&sem[1]);
     }
+
 }
     
 
