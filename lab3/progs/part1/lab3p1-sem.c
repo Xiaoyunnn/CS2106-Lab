@@ -17,7 +17,6 @@ int main() {
     sem = (sem_t *) shmat(shmid, NULL, 0);
 
     for (k = 0; k < NUM_PROCESSES; k++) {
-      //printf("sem[%d]: %p", k, sem[k]);  
       sem_init(&sem[k], 1, 0);
     }
 
