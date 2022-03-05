@@ -14,7 +14,7 @@ int main() {
     sem_t *sem[NUM_PROCESSES];
 
     shmid = shmget(IPC_PRIVATE, NUM_PROCESSES * sizeof(sem_t), IPC_CREAT | 0600);
-    sem[0] = (sem_t *) shmat(shmid, NULL, 0);
+    *sem = (sem_t *) shmat(shmid, NULL, 0);
 
     for (k = 0; k < NUM_PROCESSES; k++) {
         sem_init(sem[k], 1, 0);
@@ -40,6 +40,7 @@ int main() {
         }
 
         printf("\n\n");
+        sem_wait(sem[i]);
         if (i < NUM_PROCESSES - 1) {
             sem_post(sem[i + 1]);
         }
