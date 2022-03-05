@@ -5,6 +5,7 @@
 #include <time.h>
 #include <sys/wait.h>
 #include "config.h"
+#include "barrier.h"
 
 #define NUM_PROCESSES  8
 
