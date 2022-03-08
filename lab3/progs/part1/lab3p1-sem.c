@@ -48,6 +48,8 @@ int main() {
     else {
         for(i=0; i<NUM_PROCESSES; i++) 
             wait(NULL);
+        
+        for(i=0; i<NUM_PROCESSES; i++) 
             sem_destroy(&sem[i]);
 
         shmctl(shmid, IPC_RMID, 0);
