@@ -12,12 +12,14 @@ sem_t *sem;
 
 void init_barrier(int numproc) {
     nproc = numproc;
-    shmid_count = shmget(IPC_PRIVATE, sizeof(int), IPC_CREAT | 0600);
-    count = (int *) shmat(shmid_count, NULL, 0);
-    count[0] = 0; // initialize count to 0
+    //shmid_count = shmget(IPC_PRIVATE, sizeof(int), IPC_CREAT | 0600);
+    //count = (int *) shmat(shmid_count, NULL, 0);
+    //count[0] = 0; // initialize count to 0
 
-    shmid_sem = shmget(IPC_PRIVATE, 2 * sizeof(sem_t), IPC_CREAT | 0600);
+    shmid_sem = shmget(IPC_PRIVATE, 2 * sizeof(sem_t) + sizeof(int), IPC_CREAT | 0600);
     sem = (sem_t *) shmat(shmid_sem, NULL, 0);
+    count = (int *) &shmat(shmid_count, NULL, 0)[2];
+    count[0] = 0; // initialize count to 0
     sem_init(&sem[0], 1, 1); // sem[0] = count_mutex
     sem_init(&sem[1], 1, 0); // sem[1] = barrier
 }
