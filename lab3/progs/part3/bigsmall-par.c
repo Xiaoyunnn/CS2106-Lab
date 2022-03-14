@@ -98,7 +98,9 @@ int main() {
             wait(NULL);
 
         destroy_barrier(pid);
+        shmdt(largest);
         shmctl(shmid_largest, IPC_RMID, 0);
+        shmdt(smallest);
         shmctl(shmid_smallest, IPC_RMID, 0);
     }
 }
