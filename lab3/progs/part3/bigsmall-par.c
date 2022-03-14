@@ -98,6 +98,8 @@ int main() {
             wait(NULL);
 
         destroy_barrier(pid);
+        shmctl(shmid_largest, IPC_RMID, 0);
+        shmctl(shmid_smallest, IPC_RMID, 0);
     }
 }
 
