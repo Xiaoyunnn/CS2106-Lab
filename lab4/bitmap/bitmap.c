@@ -38,6 +38,15 @@ void print_map(unsigned char *map, int len) {
 // Returns: Index to stretch of 0's of required length, -1 if no such stretch can be found
 
 long search_map(unsigned char *bitmap, int len, long num_zeroes) {
+    // int test = -128;
+    // char testchar = test;
+    // int binary[8];
+    // for(int n = 0; n < 8; n++)
+    //     binary[7-n] = (testchar >> n) & 1;
+    // /* print result */
+    // for(int n = 0; n < 8; n++)
+    //     printf("%d", binary[n]);
+    // printf("\n");
     // print_map(bitmap, len);
     long count = 0;
     int start = 0;
