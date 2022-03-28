@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "mymalloc.h"
-#include "bitmap.c"
-#include "bitmap.h"
 
 char _heap[MEMSIZE] = {0};
 
