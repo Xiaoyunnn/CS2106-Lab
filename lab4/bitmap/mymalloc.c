@@ -48,5 +48,6 @@ void myfree(void *ptr) {
     TNode *node = find_node(_memlist, index);
     int size = node->pdata->len;
     free_map(_heap, index, size);
+    delete_node(&_memlist, node);
 }
 
