@@ -36,6 +36,8 @@ void *mymalloc(size_t size) {
     data->len = size;
     node = make_node(index, data);
     insert_node(&_memlist, node, ASCENDING);
+    // printf("size of tdata: %lu\n", sizeof(TData));
+    // printf("size of tnode: %lu\n", sizeof(TNode));
     return &_heap[index];
 }
 
@@ -46,8 +48,10 @@ void myfree(void *ptr) {
         return;
     }
     TNode *node = find_node(_memlist, index);
-    int size = node->pdata->len;
-    free_map(_heap, index, size);
-    delete_node(&_memlist, node);
+    if (node != NULL) {
+        int size = node->pdata->len;
+        free_map(_heap, index, size);
+        delete_node(&_memlist, node);
+    }
 }
 
