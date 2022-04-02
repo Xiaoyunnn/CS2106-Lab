@@ -4,7 +4,6 @@
 
 int initialise();
 long get_index(void *ptr);
-// void print_node(TNode *node);
 void print_memlist();
 void *mymalloc(size_t);
 void myfree(void *);

@@ -30,6 +30,14 @@ void print_node(TNode *node) {
 
 // Prints the memlist.
 void print_memlist() {
+    if (_memlist == NULL) {
+        TData *ini_data = (TData *) malloc(sizeof(TData));
+        TNode *node;
+        ini_data->len = MEMSIZE;
+        ini_data->status = 0;
+        node = make_node(0, ini_data);
+        insert_node(&_memlist, node, ASCENDING);
+    }
     process_list(_memlist, print_node);
 };
 
