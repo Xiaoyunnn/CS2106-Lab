@@ -95,6 +95,8 @@ void *mymalloc(size_t size) {
     data->status = 1;
     node = make_node(index, data);
     insert_node(&_memlist, node, ASCENDING);
+    // printf("size of tdata: %lu\n", sizeof(TData));
+    // printf("size of tnode: %lu\n", sizeof(TNode));
     return &_heap[index];
 }
 
