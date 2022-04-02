@@ -43,19 +43,18 @@ void print_memlist() {
 
 // Searches for the start index for the required size of memory.
 long search_heap(size_t size) {
-    int count = 0;
-    long start = 0;
-    for (long i = 0; i < MEMSIZE; i++) {
-        if (_heap[i] == 0) {
-            count++;
-            if (count == size) {
-                return start;
-            }
-        } else {
-            start = i + 1;
+    TNode *trav = _memlist;
+
+    // int diff = MEMSIZE;
+    int index = -1;
+    while(trav != NULL) {
+        if ((trav->pdata->status == 0) && (trav->pdata->len >= size)) {
+            return trav->key;
         }
+        trav = trav->next;
     }
-    return -1;
+
+    return index;
 }
 
 // Allocates size bytes of memory and returns a pointer

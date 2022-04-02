@@ -111,7 +111,7 @@ void myfree(void *ptr) {
         if (node->prev == NULL) {
             // head of list
             node->pdata->status = 0;
-            while (node->next->pdata->status == 0) {
+            while (node->next != NULL && node->next->pdata->status == 0) {
                 node->pdata->len += node->next->pdata->len;
                 merge_node(_memlist, node, SUCCEEDING);
             }

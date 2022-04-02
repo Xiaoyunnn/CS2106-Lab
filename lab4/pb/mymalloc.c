@@ -5,6 +5,8 @@
 
 char _heap[MEMSIZE] = {0};
 TNode *_memlist = NULL; // To maintain information about length
+// int initialise = initialise();
+
 
 // Do not change this. Used by the test harness.
 // You may however use this function in your code if necessary.
@@ -43,14 +45,11 @@ void print_memlist() {
 long search_heap(size_t size) {
     TNode *trav = _memlist;
 
-    int diff = 0;
+    // int diff = MEMSIZE;
     int index = -1;
     while(trav != NULL) {
         if ((trav->pdata->status == 0) && (trav->pdata->len >= size)) {
-            if ((trav->pdata->len - size) > diff) {
-                diff = trav->pdata->len - size;
-                index = trav->key;
-            }
+            return trav->key;
         }
         trav = trav->next;
     }
@@ -71,6 +70,12 @@ void *mymalloc(size_t size) {
     }
 
     long index = search_heap(size);
+    if (index == -1) {
+        return NULL;
+    }
+    for (long i = index; i < index + size; i++) {
+        _heap[i] = 1;
+    }
 
     TNode *free_node = find_node(_memlist, index);
     if (free_node != NULL) {
@@ -89,8 +94,9 @@ void *mymalloc(size_t size) {
     data->status = 1;
     node = make_node(index, data);
     insert_node(&_memlist, node, ASCENDING);
+    // printf("size of tdata: %lu\n", sizeof(TData));
+    // printf("size of tnode: %lu\n", sizeof(TNode));
     return &_heap[index];
-
 }
 
 // Frees memory pointer to by ptr.
