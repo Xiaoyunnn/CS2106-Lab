@@ -96,7 +96,7 @@ void insert_node(TNode **llist, TNode *node, int dir) {
 
 // Remove a given node from the linked list
 void delete_node(TNode **llist, TNode *node) {
-    printf("node to delete: %d\n", node->key);
+    // printf("node to delete: %d\n", node->key);
 
     if(*llist == NULL || node == NULL)
         return;
